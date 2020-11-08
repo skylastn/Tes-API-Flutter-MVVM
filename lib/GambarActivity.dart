@@ -46,108 +46,193 @@ class _GambarActivity extends State<GambarActivity>  {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-//    height = MediaQuery.of(context).size.height;
-//    width = MediaQuery.of(context).size.width;
+    height = MediaQuery.of(context).size.height;
+    width = MediaQuery.of(context).size.width;
 
     if(user.length==0){
-      return Container(
+      return Scaffold(
+        body:CircularProgressIndicator()
 
 //        height: height,
-          child: Column(
-            children: [
-              Container(
-                height: height,
-                color: Colors.white,
-              ),
-              Text("Data Sedang Loading"),
-              CircularProgressIndicator()
-            ],
-          )
+//          body: Column(
+//            children: [
+//              Container(
+//                height: height,
+//                color: Colors.white,
+//              ),
+//              Text("Data Sedang Loading"),
+//            ],
+//          )
 
       );
     }else{
-      return Container(
-        height: 400,
-        child: SingleChildScrollView(
-            child: GridView.count(
-              crossAxisCount: 3,
+
+      return Scaffold(
+        body:SingleChildScrollView(
+            child: Container(
+                height:height,
+                child:GridView.count(
+                  crossAxisCount: 2,
 //    physics: NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.all(1.0),
-              childAspectRatio: 7.0 / 9.0,
-              children: List<Widget>.generate(user.length, (index) {
-                if(user==null||user.length==0){
-                  return CircularProgressIndicator();
-                }else{
-                  return GridTile(
-                      child: InkWell(
-                        onTap: () {
+                  padding: EdgeInsets.all(1.0),
+                  childAspectRatio: 7.0 / 9.0,
+                  children: List<Widget>.generate(user.length, (index) {
+                    if(user==null||user.length==0){
+                      return CircularProgressIndicator();
+                    }else{
+                      return GridTile(
+                          child: InkWell(
+                            onTap: () {
 
-                        },
-                        child: Container(
-                          padding: EdgeInsets.only(top: 5),
-                          child: Card(
-                              color: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(8.0),
-                                ),
-                              ),
-                              elevation: 0,
-                              child: Center(
-                                child: Column(
-                                  children: <Widget>[
-                                  user[index].url==null||user[index].url.isEmpty
-                                      ?Image.network("https://i.picsum.photos/id/9/250/250.jpg?hmac=tqDH5wEWHDN76mBIWEPzg1in6egMl49qZeguSaH9_VI",
-                                    height: 90,
-                                    width: 70,
-                                    loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
-                                      if (loadingProgress == null) return child;
-                                      return Center(
-                                        child: CircularProgressIndicator(
-                                          value: loadingProgress.expectedTotalBytes != null ?
-                                          loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes : null,
-                                        ),
-                                      );
-                                    },
-                                  )
-                                      :Image.network(user[index].url,
-                                    height: 90,
-                                    width: 70,
-                                    loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
-                                      if (loadingProgress == null) return child;
-                                      return Center(
-                                        child: CircularProgressIndicator(
-                                          value: loadingProgress.expectedTotalBytes != null ?
-                                          loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes
-                                              : null,
-                                        ),
-                                      );
-                                    },
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(top: 5),
+                              child: Card(
+                                  color: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(8.0),
+                                    ),
                                   ),
-//                                    Container(
-//                                      alignment: Alignment.center,
-//                                      padding: EdgeInsets.only(left: 5, right: 5, top: 10),
-//                                      child: Text(user[index].name,
-//                                          textAlign: TextAlign.left,
-//                                          style: TextStyle(
-//                                              color: Color(0xFF444444),
-//                                              fontFamily: 'Roboto-Light.ttf',
-//                                              fontSize: 15,
-//                                              fontWeight: FontWeight.w400)),
-//                                    ),
-                                  ],
-                                ),
-                              )
-                          ),
-                        ),
-                      )
-                  );
-                }
+                                  elevation: 0,
+                                  child: Center(
+                                    child: Column(
+                                      children: <Widget>[
+                                        user[index].url==null||user[index].url.isEmpty
+                                            ?Image.network("https://i.picsum.photos/id/9/250/250.jpg?hmac=tqDH5wEWHDN76mBIWEPzg1in6egMl49qZeguSaH9_VI",
+                                          height: 120,
+                                          width: 70,
+                                          loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
+                                            if (loadingProgress == null) return child;
+                                            return Center(
+                                              child: CircularProgressIndicator(
+                                                value: loadingProgress.expectedTotalBytes != null ?
+                                                loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes : null,
+                                              ),
+                                            );
+                                          },
+                                        )
+                                            :Image.network(user[index].url,
+                                          height: 90,
+                                          width: 70,
+                                          loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
+                                            if (loadingProgress == null) return child;
+                                            return Center(
+                                              child: CircularProgressIndicator(
+                                                value: loadingProgress.expectedTotalBytes != null ?
+                                                loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes
+                                                    : null,
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                        Container(
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.only(left: 5, right: 5, top: 10),
+                                          child: Text(user[index].title,
+                                              textAlign: TextAlign.left,
+                                              style: TextStyle(
+                                                  color: Color(0xFF444444),
+                                                  fontFamily: 'Roboto-Light.ttf',
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.w400)),
+                                        ),
+                                      ],
+                                    ),
+                                  )),
+                            ),
+                          )
+                      );
+                    }
 
-              }),
+                  }),
+                )
             )
+
         ),
       );
+
+//      return Scaffold(
+//        body: SingleChildScrollView(
+//            child: GridView.count(
+//              crossAxisCount: 3,
+////    physics: NeverScrollableScrollPhysics(),
+//              padding: EdgeInsets.all(1.0),
+//              childAspectRatio: 7.0 / 9.0,
+//              children: List<Widget>.generate(user.length, (index) {
+//                if(user==null||user.length==0){
+//                  return CircularProgressIndicator();
+//                }else{
+//                  return GridTile(
+//                      child: InkWell(
+//                        onTap: () {
+//
+//                        },
+//                        child: Container(
+//                          padding: EdgeInsets.only(top: 5),
+//                          child: Card(
+//                              color: Colors.white,
+//                              shape: RoundedRectangleBorder(
+//                                borderRadius: const BorderRadius.all(
+//                                  Radius.circular(8.0),
+//                                ),
+//                              ),
+//                              elevation: 0,
+//                              child: Center(
+//                                child: Column(
+//                                  children: <Widget>[
+//                                  user[index].url==null||user[index].url.isEmpty
+//                                      ?Image.network("https://i.picsum.photos/id/9/250/250.jpg?hmac=tqDH5wEWHDN76mBIWEPzg1in6egMl49qZeguSaH9_VI",
+//                                    height: 90,
+//                                    width: 70,
+//                                    loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
+//                                      if (loadingProgress == null) return child;
+//                                      return Center(
+//                                        child: CircularProgressIndicator(
+//                                          value: loadingProgress.expectedTotalBytes != null ?
+//                                          loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes : null,
+//                                        ),
+//                                      );
+//                                    },
+//                                  )
+//                                      :Image.network(user[index].url,
+//                                    height: 90,
+//                                    width: 70,
+//                                    loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
+//                                      if (loadingProgress == null) return child;
+//                                      return Center(
+//                                        child: CircularProgressIndicator(
+//                                          value: loadingProgress.expectedTotalBytes != null ?
+//                                          loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes
+//                                              : null,
+//                                        ),
+//                                      );
+//                                    },
+//                                  ),
+////                                    Container(
+////                                      alignment: Alignment.center,
+////                                      padding: EdgeInsets.only(left: 5, right: 5, top: 10),
+////                                      child: Text(user[index].name,
+////                                          textAlign: TextAlign.left,
+////                                          style: TextStyle(
+////                                              color: Color(0xFF444444),
+////                                              fontFamily: 'Roboto-Light.ttf',
+////                                              fontSize: 15,
+////                                              fontWeight: FontWeight.w400)),
+////                                    ),
+//                                  ],
+//                                ),
+//                              )
+//                          ),
+//                        ),
+//                      )
+//                  );
+//                }
+//
+//              }),
+//            )
+//        ),
+//      );
     }
 
   }

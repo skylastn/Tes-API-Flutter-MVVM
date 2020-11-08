@@ -53,27 +53,14 @@ class _NamaUser extends State<NamaUser>  {
     width = MediaQuery.of(context).size.width;
 
     if(user.length==0){
-      return Container(
-
-//        height: height,
-          child: Column(
-            children: [
-              Container(
-                height: height,
-                color: Colors.white,
-              ),
-              Text("Data Sedang Loading"),
-              CircularProgressIndicator()
-            ],
-          )
+      return CircularProgressIndicator(
 
       );
     }else{
-      return Container(
-        height: 400,
-        child: SingleChildScrollView(
+      return Scaffold(
+        body:SingleChildScrollView(
           child: Container(
-            height: 350,
+            height:height,
             child:GridView.count(
               crossAxisCount: 3,
 //    physics: NeverScrollableScrollPhysics(),
@@ -101,34 +88,6 @@ class _NamaUser extends State<NamaUser>  {
                               child: Center(
                                 child: Column(
                                   children: <Widget>[
-//                                  kategoriProduk.data[index].imageUrl==null||kategoriProduk.data[index].imageUrl.isEmpty
-//                                      ?Image.network("https://i.picsum.photos/id/9/250/250.jpg?hmac=tqDH5wEWHDN76mBIWEPzg1in6egMl49qZeguSaH9_VI",
-//                                    height: 90,
-//                                    width: 70,
-//                                    loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
-//                                      if (loadingProgress == null) return child;
-//                                      return Center(
-//                                        child: CircularProgressIndicator(
-//                                          value: loadingProgress.expectedTotalBytes != null ?
-//                                          loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes : null,
-//                                        ),
-//                                      );
-//                                    },
-//                                  )
-//                                      :Image.network(kategoriProduk.data[index].imageUrl,
-//                                    height: 90,
-//                                    width: 70,
-//                                    loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
-//                                      if (loadingProgress == null) return child;
-//                                      return Center(
-//                                        child: CircularProgressIndicator(
-//                                          value: loadingProgress.expectedTotalBytes != null ?
-//                                          loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes
-//                                              : null,
-//                                        ),
-//                                      );
-//                                    },
-//                                  ),
                                     Container(
                                       alignment: Alignment.center,
                                       padding: EdgeInsets.only(left: 5, right: 5, top: 10),
